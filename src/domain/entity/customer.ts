@@ -2,9 +2,9 @@ import Address from "./address";
 
 export default class Customer {
   private _id: string;
-  private _name: string;
-  private _address: Address;
-  private _active: boolean;
+  private _name: string = "";
+  private _address!: Address;
+  private _active: boolean = false;
   private _rewardPoints: number = 0;
 
   constructor(id: string, name: string) {
@@ -13,7 +13,11 @@ export default class Customer {
     this.validate();
   }
 
-  get name() {
+  get id(): string {
+    return this._id;
+  }
+
+  get name(): string {
     return this._name;
   }
 
@@ -21,12 +25,7 @@ export default class Customer {
     return this._rewardPoints;
   }
 
-  get id(): string {
-    return this._id;
-  }
-
   validate() {
-    console.log(this._name, "this name");
     if (this._id.length === 0) {
       throw new Error("Id is required");
     }
@@ -35,17 +34,21 @@ export default class Customer {
     }
   }
 
-  isActive(): boolean {
-    return this._active;
-  }
-
   changeName(name: string) {
     this._name = name;
     this.validate();
   }
 
+  get Address(): Address {
+    return this._address;
+  }
+
   changeAddress(address: Address) {
     this._address = address;
+  }
+
+  isActive(): boolean {
+    return this._active;
   }
 
   activate() {
@@ -54,6 +57,7 @@ export default class Customer {
     }
     this._active = true;
   }
+
   deactivate() {
     this._active = false;
   }
