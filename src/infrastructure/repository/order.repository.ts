@@ -15,6 +15,24 @@ const orderItemToDatabase = (orderItem: OrderItem) => {
   };
 };
 
+const itemsDBtoObj = (items: OrderItemModel[]) => {
+  const itemsArr: OrderItem[] = [];
+
+  items.forEach((item: OrderItemModel) => {
+    const orderItem = new OrderItem(
+      item.id,
+      item.name,
+      item.price,
+      item.product_id,
+      item.quantity
+    );
+
+    itemsArr.push(orderItem);
+  });
+
+  return itemsArr;
+};
+
 export default class OrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
     await OrderModel.create(
@@ -81,5 +99,46 @@ export default class OrderRepository implements OrderRepositoryInterface {
         },
       }
     );
+  }
+
+  async find(id: string): Promise<Order> {
+    let orderModel: OrderModel;
+    try {
+      orderModel = await OrderModel.findOne({
+        where: { id },
+        include: ["items"],
+        rejectOnEmpty: true,
+      });
+    } catch (e) {
+      throw new Error(`Could not find order with id: ${id}`);
+    }
+
+    const order = new Order(
+      id,
+      orderModel.customer_id,
+      itemsDBtoObj(orderModel.items)
+    );
+
+    return order;
+  }
+
+  async findAll(): Promise<Order[]> {
+    const orderModel = await OrderModel.findAll({
+      include: ["items"],
+    });
+
+    const orderArr: Order[] = [];
+
+    orderModel.forEach((order: OrderModel) => {
+      const item = new Order(
+        order.id,
+        order.customer_id,
+        itemsDBtoObj(order.items)
+      );
+
+      orderArr.push(item);
+    });
+
+    return orderArr;
   }
 }

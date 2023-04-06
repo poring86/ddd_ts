@@ -165,4 +165,83 @@ describe("Order repository test", () => {
       ],
     });
   });
+
+  it("should should throw if not find an order", async () => {
+    const orderRepository = new OrderRepository();
+
+    expect(async () => {
+      await orderRepository.find("321");
+    }).rejects.toThrow(`Could not find order with id: 321`);
+  });
+
+  it("should find an order", async () => {
+    const customerRepository = new CustomerRepository();
+    const customer = new Customer("123", "Customer 1");
+    const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
+    customer.changeAddress(address);
+    await customerRepository.create(customer);
+
+    const productRepository = new ProductRepository();
+    const product = new Product("123", "Product 123", 200);
+    productRepository.create(product);
+    const orderItem = new OrderItem(
+      "1",
+      product.name,
+      product.price,
+      product.id,
+      2
+    );
+
+    const order = new Order("123", customer.id, [orderItem]);
+    const orderRepository = new OrderRepository();
+    await orderRepository.create(order);
+
+    const findOrder = await orderRepository.find(order.id);
+
+    expect(order).toStrictEqual(findOrder);
+  });
+
+  it("should find all orders", async () => {
+    const customerRepository = new CustomerRepository();
+    const customer = new Customer("123", "Customer 1");
+    const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
+    customer.changeAddress(address);
+    await customerRepository.create(customer);
+
+    const productRepository = new ProductRepository();
+    const product = new Product("123", "Product 123", 200);
+    const product2 = new Product("4", "Product 4", 150);
+
+    productRepository.create(product);
+    productRepository.create(product2);
+
+    const orderItem = new OrderItem(
+      "1",
+      product.name,
+      product.price,
+      product.id,
+      2
+    );
+    const orderItem2 = new OrderItem(
+      "6",
+      product2.name,
+      product2.price,
+      product2.id,
+      6
+    );
+
+    const orderRepository = new OrderRepository();
+    const order = new Order("123", customer.id, [orderItem]);
+    const order2 = new Order("124", customer.id, [orderItem2]);
+    await orderRepository.create(order);
+    await orderRepository.create(order2);
+
+    const all = await orderRepository.findAll();
+
+    expect(all.length).toBe(2);
+    expect(all).toContainEqual(order);
+    expect(all).toContainEqual(order2);
+
+    console.log("all", all);
+  });
 });
