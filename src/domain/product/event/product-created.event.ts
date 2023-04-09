@@ -1,6 +1,6 @@
-import EventInterface from "../shared/event.interface";
+import EventInterface from "../../shared/event/event.interface";
 
-export default class CostumerAddressChanged implements EventInterface {
+export default class ProductCreatedEvent implements EventInterface {
   private _dataTimeOccurred: Date;
 
   get eventData() {

@@ -1,4 +1,4 @@
-import EventHandlerInterface from "../../shared/event-handler.interface";
+import EventHandlerInterface from "src/domain/shared/event/event-handler.interface";
 import CustomerCreatedEvent from "../customer-created.event";
 
 export default class EnviaConsoleLog1Handler implements EventHandlerInterface {
