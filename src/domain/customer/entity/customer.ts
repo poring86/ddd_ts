@@ -3,7 +3,7 @@ import Address from "../value-object/address";
 export default class Customer {
   private _id: string;
   private _name: string = "";
-  private _address!: Address;
+  private _address: Address;
   private _active: boolean = false;
   private _rewardPoints: number = 0;
 
