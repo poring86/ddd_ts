@@ -8,11 +8,11 @@ import {
 export default class ListCustomerUseCase {
   private customerRepository: CustomerRepositoryInterface;
 
-  constructor(CustomerRepository: CustomerRepositoryInterface) {
-    this.customerRepository = CustomerRepository;
+  constructor(customerRepository: CustomerRepositoryInterface) {
+    this.customerRepository = customerRepository;
   }
 
-  async execute(input: InputListCustomerDto): Promise<OutputListCustomerDto> {
+  async execute(_input: InputListCustomerDto): Promise<OutputListCustomerDto> {
     const customers = await this.customerRepository.findAll();
     return OutputMapper.toOutput(customers);
   }
