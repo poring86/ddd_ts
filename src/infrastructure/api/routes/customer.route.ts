@@ -24,7 +24,7 @@ customerRoute.post("/", async (req: Request, res: Response) => {
   }
 });
 
-customerRoute.post("/", async (req: Request, res: Response) => {
+customerRoute.get("/", async (req: Request, res: Response) => {
   const useCase = new ListCustomerUseCase(new CustomerRepository());
   try {
     const output = await useCase.execute({});
