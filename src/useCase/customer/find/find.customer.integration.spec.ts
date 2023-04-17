@@ -32,7 +32,7 @@ describe("Test find customer use case", () => {
     const address = new Address("Street", 123, "Zip", "City");
     customer.changeAddress(address);
 
-    const customerCreated = await customerRepository.create(customer);
+    await customerRepository.create(customer);
 
     const input = {
       id: "123",
