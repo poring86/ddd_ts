@@ -242,7 +242,5 @@ describe("Order repository test", () => {
     expect(all.length).toBe(2);
     expect(all).toContainEqual(order);
     expect(all).toContainEqual(order2);
-
-    console.log("all", all);
   });
 });

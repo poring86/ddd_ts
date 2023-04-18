@@ -1,4 +1,3 @@
-import { response } from "express";
 import { app, sequelize } from "../express";
 import request from "supertest";
 
