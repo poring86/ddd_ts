@@ -1,5 +1,6 @@
-export default interface ProductInterface {
-  get id(): string;
+import Entity from "src/domain/shared/entity/entity.abstract";
+
+export default interface ProductInterface extends Entity {
   get name(): string;
   get price(): number;
   validate(): void;
