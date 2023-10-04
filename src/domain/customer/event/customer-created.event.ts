@@ -1,5 +1,10 @@
 import EventInterface from "src/domain/shared/event/event.interface";
 
+interface CustomerCreatedEventPayload {
+  id: string;
+  name: string;
+}
+
 export default class CustomerCreatedEvent implements EventInterface {
   private _dataTimeOccurred: Date;
 
@@ -11,7 +16,7 @@ export default class CustomerCreatedEvent implements EventInterface {
     return this._dataTimeOccurred;
   }
 
-  constructor(private _eventData: any) {
+  constructor(private _eventData: CustomerCreatedEventPayload) {
     this._dataTimeOccurred = new Date();
   }
 }

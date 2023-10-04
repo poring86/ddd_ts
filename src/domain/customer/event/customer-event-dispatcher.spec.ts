@@ -13,24 +13,32 @@ describe("Customer Domain events tests", () => {
     eventDispatcher.register("CustomerCreatedEvent", eventHandler1);
 
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length
-    ).toBe(1);
-
-    eventDispatcher.register("CustomerCreatedEvent", eventHandler2);
-
-    expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"]
     ).toBeDefined();
 
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length
-    ).toBe(2);
+    ).toBe(1);
+
+    eventDispatcher.register("CostumerAddressChanged", eventHandler2);
+
+    expect(
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"]
+    ).toBeDefined();
+
+    expect(
+      eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length
+    ).toBe(1);
+
+    expect(
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"].length
+    ).toBe(1);
 
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"][0]
     ).toMatchObject(eventHandler1);
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"][1]
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"][0]
     ).toMatchObject(eventHandler2);
   });
 
@@ -48,22 +56,22 @@ describe("Customer Domain events tests", () => {
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"]
     ).toBeDefined();
 
-    eventDispatcher.register("CustomerCreatedEvent", eventHandler2);
+    eventDispatcher.register("CostumerAddressChanged", eventHandler2);
 
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"][1]
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"][0]
     ).toMatchObject(eventHandler2);
 
     eventDispatcher.unregister("CustomerCreatedEvent", eventHandler1);
 
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length
-    ).toBe(1);
+    ).toBe(0);
 
-    eventDispatcher.unregister("CustomerCreatedEvent", eventHandler2);
+    eventDispatcher.unregister("CostumerAddressChanged", eventHandler2);
 
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"].length
     ).toBe(0);
   });
 
@@ -73,19 +81,23 @@ describe("Customer Domain events tests", () => {
     const eventHandler2 = new EnviaConsoleLog1Handler();
 
     eventDispatcher.register("CustomerCreatedEvent", eventHandler1);
-    eventDispatcher.register("CustomerCreatedEvent", eventHandler2);
+    eventDispatcher.register("CostumerAddressChanged", eventHandler2);
 
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"][0]
     ).toMatchObject(eventHandler1);
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"][1]
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"][0]
     ).toMatchObject(eventHandler2);
 
     eventDispatcher.unregisterAll();
 
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"]
+    ).toBeUndefined();
+
+    expect(
+      eventDispatcher.getEventHandlers["CostumerAddressChanged"]
     ).toBeUndefined();
   });
 
