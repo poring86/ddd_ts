@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/domain/customer/event/customer-address-changed.event.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1697399682242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1697399682242,
+            "name": "Commit-0",
+            "content": "import EventInterface from \"src/domain/shared/event/event.interface\";\n\nexport default class ChangeAddressEvent implements EventInterface {\n  private _dataTimeOccurred: Date;\n\n  get eventData() {\n    return this._eventData;\n  }\n\n  get dataTimeOccurred() {\n    return this._dataTimeOccurred;\n  }\n\n  constructor(private _eventData: any) {\n    this._dataTimeOccurred = new Date();\n  }\n}\n"
+        }
+    ]
+}

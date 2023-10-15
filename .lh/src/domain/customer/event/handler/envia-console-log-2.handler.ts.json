@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/domain/customer/event/handler/envia-console-log-2.handler.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1697397652418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1697397652418,
+            "name": "Commit-0",
+            "content": "import EventHandlerInterface from \"src/domain/shared/event/event-handler.interface\";\nimport CustomerCreatedEvent from \"../customer-created.event\";\n\nexport default class EnviaConsoleLog1Handler implements EventHandlerInterface {\n  handle(event: CustomerCreatedEvent) {\n    console.log(\"Esse é o segundo console.log do evento: CustomerCreated\");\n  }\n}\n"
+        }
+    ]
+}

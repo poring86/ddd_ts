@@ -1,6 +1,6 @@
 import EventInterface from "src/domain/shared/event/event.interface";
 
-export default class CostumerAddressChanged implements EventInterface {
+export default class ChangeAddressEvent implements EventInterface {
   private _dataTimeOccurred: Date;
 
   get eventData() {
