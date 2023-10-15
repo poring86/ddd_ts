@@ -42,7 +42,7 @@ describe("Customer Create events tests", () => {
 
     eventDispatcher.register("CustomerCreatedEvent", eventHandler2);
     expect(
-      eventDispatcher.getEventHandlers["CustomerCreatedEvent"][1]
+      eventDispatcher.getEventHandlers["CustomerCreatedEvent"][0]
     ).toMatchObject(eventHandler2);
     expect(
       eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length

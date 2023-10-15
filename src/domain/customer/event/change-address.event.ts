@@ -1,5 +1,15 @@
 import EventInterface from "src/domain/shared/event/event.interface";
 
+interface CustomerAddressChangedEventPayload {
+  id: string,
+  name: string,
+  street: string,
+  number: number,
+  zip: string,
+  city: string,
+}
+
+
 export default class ChangeAddressEvent implements EventInterface {
   private _dataTimeOccurred: Date;
 
@@ -11,7 +21,7 @@ export default class ChangeAddressEvent implements EventInterface {
     return this._dataTimeOccurred;
   }
 
-  constructor(private _eventData: any) {
+  constructor(private _eventData: CustomerAddressChangedEventPayload) {
     this._dataTimeOccurred = new Date();
   }
 }
